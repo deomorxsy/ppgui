@@ -1,0 +1,45 @@
+# Ignore the executable file
+implot_example
+
+# Ignore object files, temporary files, and build artifacts
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+*.log
+
+# Ignore dependency and cache files
+*.d
+*.a
+*.lib
+*.pdb
+*.idb
+*.ds_store
+*.pyc
+*.pyo
+*.suo
+*.class
+*.mode1v3
+*.mode2v3
+*.xcworkspace
+*.cproject
+*.project
+*.settings
+*.vscode
+
+# Ignore directories created by build systems or IDEs
+bin/
+build/
+Debug/
+Release/
+dist/
+.idea/
+.vscode/
+
+# submodules
+assets/imgui-cpy
+assets/implot-cpy
+gitmodules

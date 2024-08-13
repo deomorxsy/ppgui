@@ -1,0 +1,6 @@
+[submodule "assets/implot"]
+	path = assets/implot
+	url = git@github.com:epezent/implot.git
+[submodule "assets/imgui"]
+	path = assets/imgui
+	url = git@github.com:ocornut/imgui.git

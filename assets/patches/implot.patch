@@ -1,0 +1,24 @@
+diff -Naru ./assets/implot/implot.h ./assets/implot-cpy/implot.h
+--- ./assets/implot/implot.h	2024-08-12 01:15:16.379398553 -0300
++++ ./assets/implot-cpy/implot.h	2024-08-12 00:56:17.719291495 -0300
+@@ -45,7 +45,7 @@
+ // [SECTION] Obsolete API
+ 
+ #pragma once
+-#include "imgui.h"
++#include "../imgui/imgui.h"
+ 
+ //-----------------------------------------------------------------------------
+ // [SECTION] Macros and Defines
+diff -Naru ./assets/implot/implot_internal.h ./assets/implot-cpy/implot_internal.h
+--- ./assets/implot/implot_internal.h	2024-08-12 01:15:16.382731936 -0300
++++ ./assets/implot-cpy/implot_internal.h	2024-08-12 00:58:00.757395095 -0300
+@@ -32,7 +32,7 @@
+ #pragma once
+ 
+ #include <time.h>
+-#include "imgui_internal.h"
++#include "../imgui/imgui_internal.h"
+ 
+ #ifndef IMPLOT_VERSION
+ #error Must include implot.h before implot_internal.h

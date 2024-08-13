@@ -1,0 +1,48 @@
+diff -Naru ./assets/imgui/backends/imgui_impl_glfw.cpp ./assets/imgui-cpy/backends/imgui_impl_glfw.cpp
+--- ./assets/imgui/backends/imgui_impl_glfw.cpp	2024-08-12 01:15:34.339671357 -0300
++++ ./assets/imgui-cpy/backends/imgui_impl_glfw.cpp	2024-08-12 00:53:38.183799786 -0300
+@@ -73,7 +73,7 @@
+ //  2017-08-25: Inputs: MousePos set to -FLT_MAX,-FLT_MAX when mouse is unavailable/missing (instead of -1,-1).
+ //  2016-10-15: Misc: Added a void* user_data parameter to Clipboard function handlers.
+ 
+-#include "imgui.h"
++#include "../imgui.h"
+ #ifndef IMGUI_DISABLE
+ #include "imgui_impl_glfw.h"
+ 
+diff -Naru ./assets/imgui/backends/imgui_impl_glfw.h ./assets/imgui-cpy/backends/imgui_impl_glfw.h
+--- ./assets/imgui/backends/imgui_impl_glfw.h	2024-08-12 01:15:34.339671357 -0300
++++ ./assets/imgui-cpy/backends/imgui_impl_glfw.h	2024-08-12 00:54:23.407735545 -0300
+@@ -18,7 +18,7 @@
+ // - Introduction, links and more at the top of imgui.cpp
+ 
+ #pragma once
+-#include "imgui.h"      // IMGUI_IMPL_API
++#include "../imgui.h"      // IMGUI_IMPL_API
+ #ifndef IMGUI_DISABLE
+ 
+ struct GLFWwindow;
+diff -Naru ./assets/imgui/backends/imgui_impl_opengl3.cpp ./assets/imgui-cpy/backends/imgui_impl_opengl3.cpp
+--- ./assets/imgui/backends/imgui_impl_opengl3.cpp	2024-08-12 01:15:34.339671357 -0300
++++ ./assets/imgui-cpy/backends/imgui_impl_opengl3.cpp	2024-08-12 00:58:22.217697879 -0300
+@@ -112,7 +112,7 @@
+ #define _CRT_SECURE_NO_WARNINGS
+ #endif
+ 
+-#include "imgui.h"
++#include "../imgui.h"
+ #ifndef IMGUI_DISABLE
+ #include "imgui_impl_opengl3.h"
+ #include <stdio.h>
+diff -Naru ./assets/imgui/backends/imgui_impl_opengl3.h ./assets/imgui-cpy/backends/imgui_impl_opengl3.h
+--- ./assets/imgui/backends/imgui_impl_opengl3.h	2024-08-12 01:15:34.339671357 -0300
++++ ./assets/imgui-cpy/backends/imgui_impl_opengl3.h	2024-08-12 00:57:17.680124152 -0300
+@@ -26,7 +26,7 @@
+ //  Only override if your GL version doesn't handle this GLSL version. See GLSL version table at the top of imgui_impl_opengl3.cpp.
+ 
+ #pragma once
+-#include "imgui.h"      // IMGUI_IMPL_API
++#include "../imgui.h"      // IMGUI_IMPL_API
+ #ifndef IMGUI_DISABLE
+ 
+ // Follow "Getting Started" link and check examples/ folder to learn about using backends!
