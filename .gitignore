@@ -1,6 +1,9 @@
 # Ignore the executable file
 implot_example
 
+# valgrind-related
+callgrind*
+
 # Ignore object files, temporary files, and build artifacts
 *.o
 *.obj

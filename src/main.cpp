@@ -1,7 +1,7 @@
-#include "./assets/imgui/imgui.h"
-#include "./assets/implot/implot.h"
-#include "./assets/imgui/backends/imgui_impl_glfw.h"
-#include "./assets/imgui/backends/imgui_impl_opengl3.h"
+#include "../assets/imgui/imgui.h"
+#include "../assets/implot/implot.h"
+#include "../assets/imgui/backends/imgui_impl_glfw.h"
+#include "../assets/imgui/backends/imgui_impl_opengl3.h"
 #include <GLFW/glfw3.h> // Include glfw3.h after our OpenGL definitions
 
 // Callback for rendering

@@ -4,3 +4,6 @@
 [submodule "assets/imgui"]
 	path = assets/imgui
 	url = git@github.com:ocornut/imgui.git
+[submodule "assets/emsdk"]
+	path = assets/emsdk
+	url = https://github.com/emscripten-core/emsdk.git
