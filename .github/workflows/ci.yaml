@@ -1,0 +1,26 @@
+name: OCI spec image build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  emscripten:
+    runs-on: ubuntu-22.04
+    steps:
+
+    - name: Access current repository
+      uses: actions/checkout@v4
+
+    - name: Install Dependencies
+      run: |
+        docker run  -d -p 5000:5000 --name registry registry:2.7
+        # env git_hash env goes into the compose.yml
+        docker compose -f ./compose.yml --progress=plain build imgui
+        docker push localhost:5000/ppgui:latest
+
+    - name: Build example_sdl2_opengl3 with Emscripten
+      run: |
+        pushd emsdk-master
+        source ./emsdk_env.sh
+        popd
+        make -C examples/example_sdl2_opengl3 -f Makefile.emscripten

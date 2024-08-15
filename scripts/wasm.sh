@@ -3,13 +3,13 @@
 #clang -g -O2 -Wall -o plota ./implot.cpp
 IMGUI_SRC="./assets/imgui/"
 IMPLOT_SRC="./assets/implot/"
-
-IMGUI_PATCH="./assets/patches/imgui.patch"
-IMPLOT_PATCH="./assets/patches/implot.patch"
+EMSDK_SRC="./assets/emsdk/"
+#IMGUI_PATCH="./assets/patches/imgui.patch"
+#IMPLOT_PATCH="./assets/patches/implot.patch"
 
 compile() {
-if [ -d "$IMGUI_SRC" ] && [ -d "$IMPLOT_SRC" ]; then
-    g++ -o ./ppgui ./src/main.cpp \
+if [ -d "$IMGUI_SRC" ] && [ -d "$IMPLOT_SRC" ] && [ -d "$EMSDK_SRC" ]; then
+    em++ -o ./glfw_wgpu/web/wasmgui ./src/main.cpp \
     assets/imgui/imgui.cpp \
     assets/imgui/imgui_draw.cpp \
     assets/imgui/imgui_widgets.cpp \
@@ -22,9 +22,11 @@ if [ -d "$IMGUI_SRC" ] && [ -d "$IMPLOT_SRC" ]; then
     -Iassets/imgui \
     -Iassets/implot \
     -Iassets/imgui/backends \
-    -lglfw -lGL -lGLU -lX11 -lpthread -lXrandr -lXi -ldl
+    -lglfw -lGL -lGLU -lX11 -ldl
+    #-lpthread -lXrandr -lXi kept out
 else
-    setup
+    echo "Call setup first."
+    #setup
 fi
 }
 

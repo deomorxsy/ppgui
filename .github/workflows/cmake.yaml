@@ -1,0 +1,66 @@
+name: cmake
+
+on:
+  workflow_dispatch:
+  push:
+  branches:
+    - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+
+    - name: Access current repository
+      uses: actions/checkout@v4
+
+    - name: Populate Build Directory
+      run: cmake -E make_directory ${{github.workspace}}/assets/build/
+
+    - name: Install Dependencies
+      run: |
+        sudo apt-get update -qq
+        sudo apt-get install -y gcc-multilib python3 curl zip unzip
+        sudo apt-get install -y --no-install-recommends libx11-dev libxcursor-dev libxrandr-dev libxinerama-dev libxi-dev libxext-dev libxfixes-dev libgl1-mesa-dev
+        #docker run  -d -p 5000:5000 --name registry registry:2.7
+        ## env git_hash env goes into the compose.yml
+        #docker compose -f ./compose.yml --progress=plain build imgui
+        #docker push localhost:5000/ppgui:latest
+
+    - name: Emscripten Setup
+      shell: bash
+      working-directory: ${{github.workspace}}/assets/emsdk/
+      run: |
+        ./emsdk install latest
+        ./emsdk activate latest
+        # only needed when getting from the wget instead of submodule
+        # wget https://github.com/juj/emsdk/archive/master.tar.gz \
+        # tar -xf master.tar.gz \
+        # pushd emsdk-master
+        #source ./emsdk_env.sh
+        source ./emsdk_env.sh
+        #popd
+        #make -C ./glfw_wgpu/ -f Makefile.emscripten
+
+    - name: Configure CMake
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/assets/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
+
+    - name: Build
+      run: cmake --build ./assets/build --config Release
+
+    - name: Create Artifact
+      run: |
+        mkdir -p ./assets/artifacts/wasm/
+        cp -r ./glfw_wgpu/web/ ./assets/artifacts/wasm/
+        tar -zcvf ./assets/artifacts/wasm.tar.gz ./assets/artifacts/wasm/
+        tar -zcvf ./assets/artifacts/desk+wasm-release.tar.gz ./assets/artifacts/ppgui ./artifacts/wasm.tar.gz
+
+    - name: Publish Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: desk+wasm-release.tar.gz
+        path: ./assets/artifacts/
+

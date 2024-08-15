@@ -13,6 +13,8 @@ use Plack::Response;
 
 #use Plack::App::Directory;
 
+my $wasm_dir = "./glfw_wgpu/web/index.wasm"
+
 # pass directory as argument (argv)
 my $WEB_DIR = shift @ARGV or die "Usage: $0 /path/to/html\n";
 

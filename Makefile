@@ -13,10 +13,16 @@ WASMDIR="./glfw_wgpu"
 all: imgui wasm
 
 imgui:
-	./scripts/compile.sh; compile
+	./scripts/compile.sh compile
 
 wasm:
-	$(MAKE) -C $(WASMDIR) M=$(PWD)
+	cp ./src/main.cpp $(WASMDIR)
+	$(MAKE) -C $(WASMDIR) -f Makefile.emscripten
+	$(clean)
+
 
 serve_wasm:
 	./scripts/cgi.pl ./glfw_wgpu/web/index.html
+
+clean:
+	rm $(WASMDIR)/main.cpp

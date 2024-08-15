@@ -1,0 +1,17 @@
+services:
+  ppgui:
+    environment:
+      - git_hash
+    build:
+      context: ".."
+      dockerfile: "./deploy/Dockerfile"
+      tags:
+        - "localhost:5000/ppgui:latest"
+    stop_signal: SIGINT
+  wasm:
+    build:
+      context: ".."
+      dockerfile: "./deploy/Dockerfile.wasm"
+      tags:
+        - "localhost:5000/wasm_ppgui:latest"
+    stop_signal: SIGINT

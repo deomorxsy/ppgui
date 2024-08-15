@@ -9,7 +9,7 @@ jobs:
     steps:
 
     - name: Access current repository
-    - uses: actions/checkout@v4
+      uses: actions/checkout@v4
 
     - name: Install Dependencies
       run: |
@@ -24,4 +24,5 @@ jobs:
         pushd emsdk-master
         source ./emsdk_env.sh
         popd
-        make -C examples/example_sdl2_opengl3 -f Makefile.emscripten
+        make -f ./glfw_wgpu/Makefile.emscripten
+        #make -C examples/example_sdl2_opengl3 -f Makefile.emscripten

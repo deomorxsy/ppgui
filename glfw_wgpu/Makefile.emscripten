@@ -10,10 +10,14 @@ CC = emcc
 CXX = em++
 WEB_DIR = web
 EXE = $(WEB_DIR)/index.js
-IMGUI_DIR = ../assets/imgui/
-SOURCES = main.cpp
+IMGUI_DIR = ../assets/imgui
+IMPLOT_DIR = ../assets/implot
+SOURCES = ../src/main.cpp
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_demo.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
-SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_wgpu.cpp
+SOURCES += $(IMGUI_DIR)/backends/imgui_impl_glfw.cpp $(IMGUI_DIR)/backends/imgui_impl_wgpu.cpp $(IMGUI_DIR)/backends/imgui_impl_opengl3.cpp
+SOURCES += $(IMPLOT_DIR)/implot_items.cpp $(IMPLOT_DIR)/implot.cpp
+
+
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 CPPFLAGS =
@@ -39,8 +43,9 @@ LDFLAGS += -s NO_FILESYSTEM=1
 CPPFLAGS += -DIMGUI_DISABLE_FILE_FUNCTIONS
 endif
 
-ifeq ($USE_FILE_SYSTEM), 1
-LDFLAGS += --no-heap-copy --preload-file ../../misc/fonts@/fonts
+ifeq ($(USE_FILE_SYSTEM), 1)
+#LDFLAGS += --no-heap-copy --preload-file ../../misc/fonts@/fonts
+LDFLAGS += --no-heap-copy --preload-file ../assets/imgui/misc/fonts@/fonts
 endif
 
 
@@ -48,7 +53,7 @@ endif
 ## FINAL BUILD FLAGS
 ##---------------------------------------------------------------------
 
-CPPFLAGS += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends
+CPPFLAGS += -I$(IMGUI_DIR) -I$(IMGUI_DIR)/backends -I$(IMPLOT_DIR)
 # CPPFLAGS+= -g
 CPPFLAGS += -Wall -Wformat -Os $(EMS)
 # LDFLAGS += --shell-file shell_minimal.html
@@ -62,9 +67,15 @@ LDFLAGS += $(EMS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 %.o:$(IMGUI_DIR)/%.cpp
+#%.o:./web/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
+#
 %.o:$(IMGUI_DIR)/backends/%.cpp
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+
+# implot build rules
+%.o:$(IMPLOT_DIR)/%.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
 all: $(EXE)
@@ -74,9 +85,11 @@ $(WEB_DIR):
 	mkdir $@
 
 serve: all
-	../scripts/cgi.pl $(WEB_DIR)
+	#../scripts/cgi.pl $(WEB_DIR)
 	#python3 -m http.server -d $(WEB_DIR)
+	python3 -m http.server 8000 --bind 0.0.0.0 -d $(WEB_DIR)
 
+# SOURCES inside OBJS
 $(EXE): $(OBJS) $(WEB_DIR)
 	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
 
