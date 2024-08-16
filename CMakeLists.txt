@@ -13,7 +13,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Define source directories
 set(IMGUI_SRC "${CMAKE_SOURCE_DIR}/assets/imgui")
 set(IMPLOT_SRC "${CMAKE_SOURCE_DIR}/assets/implot")
-set(WASMDIR "${CMAKE_SOURCE_DIR}/glfw_wgpu")
+set(WASMDIR "${CMAKE_SOURCE_DIR}/glfw")
 
 
 # Apply patches if needed

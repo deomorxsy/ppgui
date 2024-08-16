@@ -9,7 +9,7 @@ EMSDK_SRC="./assets/emsdk/"
 
 compile() {
 if [ -d "$IMGUI_SRC" ] && [ -d "$IMPLOT_SRC" ] && [ -d "$EMSDK_SRC" ]; then
-    em++ -o ./glfw_wgpu/web/wasmgui ./src/main.cpp \
+    em++ -o ./glfw/web/wasmgui ./src/main.cpp \
     assets/imgui/imgui.cpp \
     assets/imgui/imgui_draw.cpp \
     assets/imgui/imgui_widgets.cpp \

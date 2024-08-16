@@ -8,7 +8,7 @@ IMGUI_SRC=./assets/imgui
 IMPLOT_SRC=./assets/implot
 SOURCES=$(wildcard $(IMGUI_SRC)) $(wildcard $(IMGUI_PLOT))
 
-WASMDIR="./glfw_wgpu"
+WASMDIR="./glfw"
 
 all: imgui wasm
 
@@ -22,7 +22,7 @@ wasm:
 
 
 serve_wasm:
-	./scripts/cgi.pl ./glfw_wgpu/web/index.html
+	./scripts/cgi.pl ./glfw/web/index.html
 
 clean:
 	rm $(WASMDIR)/main.cpp

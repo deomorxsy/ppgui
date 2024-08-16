@@ -10,7 +10,7 @@ WORKDIR /app
 
 #COPY src/ ./src/
 #COPY CMakeLists.txt .
-COPY ["./src/", "CMakeLists.txt", "./glfw_wgpu/", "."]
+COPY ["./src/", "CMakeLists.txt", "./glfw/", "."]
 
 WORKDIR /app/build
 

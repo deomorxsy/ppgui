@@ -43,7 +43,7 @@ jobs:
         #source ./emsdk_env.sh
         source ./emsdk_env.sh
         #popd
-        #make -C ./glfw_wgpu/ -f Makefile.emscripten
+        #make -C ./glfw/ -f Makefile.emscripten
 
     - name: Configure CMake
       run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev -DCMAKE_TOOLCHAIN_FILE=$GITHUB_WORKSPACE/assets/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake
@@ -54,7 +54,7 @@ jobs:
     - name: Create Artifact
       run: |
         mkdir -p ./assets/artifacts/wasm/
-        cp -r ./glfw_wgpu/web/ ./assets/artifacts/wasm/
+        cp -r ./glfw/web/ ./assets/artifacts/wasm/
         tar -zcvf ./assets/artifacts/wasm.tar.gz ./assets/artifacts/wasm/
         tar -zcvf ./assets/artifacts/desk+wasm-release.tar.gz ./assets/artifacts/ppgui ./artifacts/wasm.tar.gz
 

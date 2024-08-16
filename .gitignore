@@ -1,8 +1,8 @@
 # Ignore the executable file
 implot_example
-glfw_wgpu/main.cpp
-glfw_wgpu/web/index.js
-glfw_wgpu/web/index.wasm
+glfw/main.cpp
+glfw/web/index.js
+glfw/web/index.wasm
 imgui.ini
 ppgui
 
